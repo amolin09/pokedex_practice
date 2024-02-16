@@ -31,3 +31,7 @@ p.pokemonType{
     justify-items: center;
     align-items: center;
 }
+
+#iconContainer{
+    cursor: pointer;
+}
