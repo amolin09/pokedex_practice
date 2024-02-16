@@ -1,0 +1,33 @@
+.details{
+    display: flex;
+    background-color: silver;
+    height: 75px;
+}
+
+.detailBlock{
+    height: auto;
+    width: auto;
+}
+
+#detailText{
+    width: 75%;
+    padding-left: 30px;
+}
+
+h3.pokemonName{
+    margin: 5px 0px 0px;
+    font-size: 22px;
+}
+
+p.pokemonType{
+    margin: 0px 0px 5px;
+    font-size: 18px;
+}
+
+#favoriteIcon{
+    display: flex;
+    /* width: 25%; */
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+}
