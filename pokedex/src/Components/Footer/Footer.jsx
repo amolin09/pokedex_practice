@@ -1,9 +1,11 @@
-// import Pokedex from "./Pokedex"
+import "./Footer.css"
 
 function Dashboard(){
 
     return(
-        <div>My Footer</div>
+        <div className="Footer">
+            <div>My Footer</div>
+        </div>
     )
 }
 

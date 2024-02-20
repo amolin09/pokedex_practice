@@ -1,0 +1,21 @@
+.Nav{
+
+    min-height: 75px;
+    background-color: green;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+
+}
+
+.controls{
+    margin: 20px;
+    /* border: solid 1px black; */
+    font-size: 20px;
+}
+
+select{
+    margin: 10px;
+}
+

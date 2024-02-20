@@ -1,17 +1,17 @@
-import Dashboard from './Components/Dashboard/Dashboard';
-import Footer from './Components/Footer/Footer';
-import Body from './Components/Body/Body.jsx';
+
+import PokeDex from './Components/PokeDex.jsx';
 
 function App() {
 
+  
+
   return(
     <>
-      <Dashboard/>
-      <Body/>
-      <Footer/>
+      <PokeDex/>
     </>
   
   )
   
-    }
+
+}
 export default App;
