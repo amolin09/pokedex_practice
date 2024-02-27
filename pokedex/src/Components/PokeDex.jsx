@@ -50,10 +50,16 @@ export default function PokeDex(){
     
   }  
 
+  const [searchValue, setSearchValue] = useState("");
+
+  const changeSearchValue = (e) =>{
+    setSearchValue(e.target.value)
+  }
+
   return(
       <>
-        <NavBar typesList={typesList} type={type} changeType={changeType} favoriteFilter={favoritesOnly} toggleFavoritesOnly={toggleFavoritesOnly}/>
-        <Body type={type} favoriteFilter={favoritesOnly} database={database} toggleFavoritePokemon={toggleFavoritePokemon}/>
+        <NavBar typesList={typesList} type={type} changeType={changeType} favoriteFilter={favoritesOnly} toggleFavoritesOnly={toggleFavoritesOnly} searchValue={searchValue} changeSearchValue={changeSearchValue}/>
+        <Body type={type} favoriteFilter={favoritesOnly} database={database} toggleFavoritePokemon={toggleFavoritePokemon} searchValue={searchValue}/>
         <Footer/>
       </>
       

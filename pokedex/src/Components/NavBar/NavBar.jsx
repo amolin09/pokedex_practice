@@ -1,35 +1,18 @@
 import "./NavBar.css"
+import { Input } from "@mui/base/Input";
 
-function NavBar({type, changeType, favoriteFilter, toggleFavoritesOnly}){
+function NavBar({typesList, type, changeType, favoriteFilter, toggleFavoritesOnly, searchValue, changeSearchValue}){
 //needs to be moved to PokeDex 
- const typesList = [
-    {value: "All"}, 
-    {value: "Normal"},
-    {value: "Fire"},
-    {value: "Water"},
-    {value: "Electric"},
-    {value: "Grass"},
-    {value: "Ice"},
-    {value: "Fighting"},
-    {value: "Poison"},
-    {value: "Ground"},
-    {value: "Flying"},
-    {value: "Psychic"},
-    {value: "Bug"},
-    {value: "Rock"},
-    {value: "Ghost"},
-    {value: "Dragon"},
-    {value: "Dark"},
-    {value: "Steel"},
-    {value: "Fairy"},
-]
+
 
 // const [type, setType] = useState(typesList[0].value)
 //needs to be moved to Pokedex
     return(
         <div className="Nav">
             <div className="controls">
-                Pokemon!
+                
+                    Pokemon
+                
             </div>
             
             <div className="controls">
@@ -44,6 +27,9 @@ function NavBar({type, changeType, favoriteFilter, toggleFavoritesOnly}){
                 {favoriteFilter ? <>Showing Favorites Only</> : <></>}
             </div>
             
+            <div className="controls">
+                <Input value={searchValue} onChange={changeSearchValue} placeholder="Search by Name"/>
+            </div>
         </div>
     )
 }

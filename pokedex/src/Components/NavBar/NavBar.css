@@ -1,6 +1,6 @@
 .Nav{
 
-    min-height: 75px;
+    min-height: 50px;
     background-color: green;
     position: fixed;
     top: 0;
@@ -18,4 +18,7 @@
 select{
     margin: 10px;
 }
+
+
+
 
