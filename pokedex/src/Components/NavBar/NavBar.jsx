@@ -1,7 +1,7 @@
 import "./NavBar.css"
 import { Input } from "@mui/base/Input";
 
-function NavBar({typesList, type, changeType, favoriteFilter, toggleFavoritesOnly, searchValue, changeSearchValue}){
+function NavBar({typesList, type, changeType, favoriteFilter, toggleFavoritesOnly, searchValue, changeSearchValue, resetFilters}){
 //needs to be moved to PokeDex 
 
 
@@ -10,9 +10,7 @@ function NavBar({typesList, type, changeType, favoriteFilter, toggleFavoritesOnl
     return(
         <div className="Nav">
             <div className="controls">
-                
-                    Pokemon
-                
+                <span id="pokemon-title" onClick={resetFilters}>Pokemon</span>    
             </div>
             
             <div className="controls">
@@ -23,13 +21,15 @@ function NavBar({typesList, type, changeType, favoriteFilter, toggleFavoritesOnl
             </div>
 
             <div className="controls">
+                <Input value={searchValue} onChange={changeSearchValue} placeholder="Search by Name"/>
+            </div>
+
+            <div className="controls">
                 <button onClick={toggleFavoritesOnly}>Filter Favorites</button>
                 {favoriteFilter ? <>Showing Favorites Only</> : <></>}
             </div>
             
-            <div className="controls">
-                <Input value={searchValue} onChange={changeSearchValue} placeholder="Search by Name"/>
-            </div>
+            
         </div>
     )
 }

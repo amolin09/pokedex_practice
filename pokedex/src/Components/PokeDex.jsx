@@ -56,9 +56,16 @@ export default function PokeDex(){
     setSearchValue(e.target.value)
   }
 
+  const resetFilters = () =>{
+    setType(typesList[0].value)
+    setFavoritesOnly(false)
+    setSearchValue("")
+    window.scrollTo(0,0)
+  }
+
   return(
       <>
-        <NavBar typesList={typesList} type={type} changeType={changeType} favoriteFilter={favoritesOnly} toggleFavoritesOnly={toggleFavoritesOnly} searchValue={searchValue} changeSearchValue={changeSearchValue}/>
+        <NavBar typesList={typesList} type={type} changeType={changeType} favoriteFilter={favoritesOnly} toggleFavoritesOnly={toggleFavoritesOnly} searchValue={searchValue} changeSearchValue={changeSearchValue} resetFilters={resetFilters}/>
         <Body type={type} favoriteFilter={favoritesOnly} database={database} toggleFavoritePokemon={toggleFavoritePokemon} searchValue={searchValue}/>
         <Footer/>
       </>

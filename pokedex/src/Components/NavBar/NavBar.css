@@ -19,6 +19,12 @@ select{
     margin: 10px;
 }
 
+#pokemon-title{
+    display: flex;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 
 
 

@@ -74,7 +74,8 @@ export default function Body({type, favoriteFilter, database, toggleFavoritePoke
         }
         }
 
-    }else{
+    }
+    else{
 
         if(type==="All"){
             if(favoriteFilter === true){ 
@@ -119,10 +120,11 @@ export default function Body({type, favoriteFilter, database, toggleFavoritePoke
 
     }
 
-    
-
     return(
-        <div className="Body">{PokeData}</div>
+        <div className="Body">
+            {PokeData.length === 0? <h1 className="no-results">No Results Found</h1>: <></>}
+            {PokeData}
+        </div>
     )
     
 }
