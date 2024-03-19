@@ -5,12 +5,14 @@
     height: 500px;
     margin-top: 20px;
     margin-bottom: 20px;
+    
 }
 
 .imgContainer{
     display: flex;
     height: 425px;
     align-items: center;
+    cursor: pointer;
 }
 
 img{

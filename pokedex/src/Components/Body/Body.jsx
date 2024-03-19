@@ -1,25 +1,45 @@
 import PokeCard from "../PokeCard/PokeCard"
-// import { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
+import PokeModal from "../PokeModal/pokeModal"
 import "./Body.css"
-// import db from "../../pokemonDatabase"
-// import axios from "axios";
+import axios from "axios";
 
 export default function Body({type, favoriteFilter, database, toggleFavoritePokemon, searchValue}){
+    let [fetchedPokeData, setFetchedPokeData] = useState([]);
+    const [sindglePokeData, setSinglePokeData] = useState({});
+    const [pokePicker, setPokePicker] = useState(0)
+    const [openPokeModal, setOpenPokeModal] = useState(false);
 
-    // const  pokeURL = "https://pokeapi.co/api/v2/pokemon/?limit=151"
-
-    // let [pokeData, setPokeData] = useState([]);
+    const basePokeURL = `https://pokeapi.co/api/v2/pokemon`;
 
     // useEffect(()=>{
     //     getPokeData()
-    // }, [])
+    // }, [pokePicker])
 
-    // const getPokeData = async() => {
-    //     axios.get(pokeURL)
-    //     .then((res)=>{
-    //         setPokeData(res.data.results)
-    //     })
-    // }
+    const getPokeData = async(pokeId) => {
+        
+        axios.get(basePokeURL + '/' + pokeId)
+        .then((res)=>{
+            setFetchedPokeData([...fetchedPokeData, res.data])
+        })
+    }
+    
+    const handleOpenPokeModal = async (e) => {
+
+        let pokeId = Number(e.currentTarget.id)
+        const data = await getPokeData(pokeId)
+        setPokePicker(pokeId - 1)
+        setSinglePokeData(data)
+        setOpenPokeModal(true)
+    }
+
+    const handleClosePokeModal = () => setOpenPokeModal(false);
+
+    
+
+    // const checkFetchedPokeData = (num) =>{}
+
+
 
     let PokeData = []
 
@@ -35,96 +55,32 @@ export default function Body({type, favoriteFilter, database, toggleFavoritePoke
         }
     }
 
-    if(searchValue===""){
+    let filteredPokeData = database;
 
-        if(type==="All"){
-            if(favoriteFilter === true){ 
-    
-                const favoritePokeData = database.filter((pokemon) => pokemon.isFavorite === true)
-                PokeData = favoritePokeData.map((pokemon)=>{
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                    
-                    )})
-            }
-            else{
-                PokeData = database.map((pokemon)=> {
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                
-                    )})
-        }}
-        else{
-            const pokeDataTypeFilter = database.filter((pokemon)=> pokemon.pokeType1 === type||pokemon.pokeType2 === type)
-            if(favoriteFilter === true){ 
-    
-                const favoritePokeData = pokeDataTypeFilter.filter((pokemon) => pokemon.isFavorite === true)
-                PokeData = favoritePokeData.map((pokemon)=>{
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                    
-                    )})
-            }
-            else{
-                PokeData = pokeDataTypeFilter.map((pokemon)=> {
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                
-                    )})
-        }
-        }
-
+    if(favoriteFilter === true){
+        filteredPokeData = filteredPokeData.filter((pokemon)=>pokemon.isFavorite===true)
     }
-    else{
 
-        if(type==="All"){
-            if(favoriteFilter === true){ 
-    
-                const favoritePokeData = database.filter((pokemon) => pokemon.isFavorite === true)
-                const nameFilteredPokeData = favoritePokeData.filter(searchNameFilter)
-                PokeData = nameFilteredPokeData.map((pokemon)=>{
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                    
-                    )})
-            }
-            else{
-                const nameFilteredDatabase = database.filter(searchNameFilter)
-                PokeData = nameFilteredDatabase.map((pokemon)=> {
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                
-                    )})
-        }}
-        else{
-            const pokeDataTypeFilter = database.filter((pokemon)=> pokemon.pokeType1 === type||pokemon.pokeType2 === type)
-            if(favoriteFilter === true){ 
-    
-                const favoritePokeData = pokeDataTypeFilter.filter((pokemon) => pokemon.isFavorite === true)
-                const nameFilteredPokeData = favoritePokeData.filter(searchNameFilter)
-                PokeData = nameFilteredPokeData.map((pokemon)=>{
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                    
-                    )})
-            }
-            else{
-                const nameFilteredPokeData = pokeDataTypeFilter.filter(searchNameFilter)
-                PokeData = nameFilteredPokeData.map((pokemon)=> {
-                    return(
-                        <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon}/>
-                                
-                    )})
-        }
-        }
-
+    if(type !== "All"){
+        filteredPokeData = filteredPokeData.filter((pokemon)=>pokemon.pokeType1 === type||pokemon.pokeType2 === type)
     }
+
+    if(searchValue !== ""){
+        filteredPokeData = filteredPokeData.filter(searchNameFilter)
+    }
+
+    PokeData = filteredPokeData.map((pokemon)=>{
+        return(
+            <PokeCard key={pokemon.pokeNum} pokeNum={pokemon.pokeNum} pokeName={pokemon.pokeName} pokeType1={pokemon.pokeType1} pokeType2={pokemon.pokeType2} isFavorite={pokemon.isFavorite} toggleFavoritePokemon={toggleFavoritePokemon} handleOpenPokeModal={handleOpenPokeModal}/>
+        )
+    })
 
     return(
         <div className="Body">
             {PokeData.length === 0? <h1 className="no-results">No Results Found</h1>: <></>}
             {PokeData}
+            {openPokeModal ? <PokeModal openPokeModal={openPokeModal} handleClosePokeModal={handleClosePokeModal} pokePicker={pokePicker} pokeData={sindglePokeData}/> : <></>}
         </div>
     )
-    
+
 }
