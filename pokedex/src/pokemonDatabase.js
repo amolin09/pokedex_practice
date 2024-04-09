@@ -32,11 +32,11 @@ const db = [
     {pokeNum: 26, pokeName: "Raichu", pokeType1: "Electric", isFavorite: false}, 
     {pokeNum: 27, pokeName: "Sandshrew", pokeType1: "Ground", isFavorite: false}, 
     {pokeNum: 28, pokeName: "Sandslash", pokeType1: "Ground", isFavorite: false}, 
-    {pokeNum: 29, pokeName: "Nidoran", pokeType1: "Poison", isFavorite: false}, 
+    {pokeNum: 29, pokeName: "Nidoran♀", pokeType1: "Poison", isFavorite: false}, 
     {pokeNum: 30, pokeName: "Nidorina", pokeType1: "Poison", isFavorite: false},
 
     {pokeNum: 31, pokeName: "Nidoqueen", pokeType1: "Poison", pokeType2: "Ground", isFavorite: false}, 
-    {pokeNum: 32, pokeName: "Nidoran", pokeType1: "Poison", isFavorite: false}, 
+    {pokeNum: 32, pokeName: "Nidoran♂", pokeType1: "Poison", isFavorite: false}, 
     {pokeNum: 33, pokeName: "Nidorino", pokeType1: "Poison", isFavorite: false}, 
     {pokeNum: 34, pokeName: "Nidoking", pokeType1: "Poison", pokeType2: "Ground", isFavorite: false}, 
     {pokeNum: 35, pokeName: "Clefairy", pokeType1: "Fairy", isFavorite: false}, 

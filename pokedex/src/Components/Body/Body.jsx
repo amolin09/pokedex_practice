@@ -6,38 +6,44 @@ import axios from "axios";
 
 export default function Body({type, favoriteFilter, database, toggleFavoritePokemon, searchValue}){
     let [fetchedPokeData, setFetchedPokeData] = useState([]);
-    const [sindglePokeData, setSinglePokeData] = useState({});
+    const [singlePokeData, setSinglePokeData] = useState({});
     const [pokePicker, setPokePicker] = useState(0)
     const [openPokeModal, setOpenPokeModal] = useState(false);
 
     const basePokeURL = `https://pokeapi.co/api/v2/pokemon`;
 
     // useEffect(()=>{
-    //     getPokeData()
-    // }, [pokePicker])
+
+    //     console.log(singlePokeData)
+    // })
 
     const getPokeData = async(pokeId) => {
         
-        axios.get(basePokeURL + '/' + pokeId)
+         return axios.get(basePokeURL + '/' + pokeId)
         .then((res)=>{
             setFetchedPokeData([...fetchedPokeData, res.data])
+            return res.data;
         })
     }
     
     const handleOpenPokeModal = async (e) => {
 
         let pokeId = Number(e.currentTarget.id)
-        const data = await getPokeData(pokeId)
-        setPokePicker(pokeId - 1)
-        setSinglePokeData(data)
+        setPokePicker(pokeId)
+        let pokeEntryExists = fetchedPokeData.some((obj) => obj.id === pokeId)
+        console.log(pokeEntryExists)
+        if(!pokeEntryExists){
+            const data = await getPokeData(pokeId)
+            setSinglePokeData(data)
+        }
+        else{
+            setSinglePokeData(fetchedPokeData.find((obj) => obj.id === pokeId))
+        }
+        console.log(fetchedPokeData)
         setOpenPokeModal(true)
     }
 
-    const handleClosePokeModal = () => setOpenPokeModal(false);
-
-    
-
-    // const checkFetchedPokeData = (num) =>{}
+    const handleClosePokeModal = () => setOpenPokeModal(false);   
 
 
 
@@ -79,7 +85,7 @@ export default function Body({type, favoriteFilter, database, toggleFavoritePoke
         <div className="Body">
             {PokeData.length === 0? <h1 className="no-results">No Results Found</h1>: <></>}
             {PokeData}
-            {openPokeModal ? <PokeModal openPokeModal={openPokeModal} handleClosePokeModal={handleClosePokeModal} pokePicker={pokePicker} pokeData={sindglePokeData}/> : <></>}
+            {openPokeModal ? <PokeModal openPokeModal={openPokeModal} handleClosePokeModal={handleClosePokeModal} pokePicker={pokePicker} pokeData={singlePokeData}/> : <></>}
         </div>
     )
 
